@@ -79,7 +79,7 @@ void gui::CreateHWindow(const char* windowName) noexcept
 {
 	windowClass.cbSize = sizeof(WNDCLASSEX);
 	windowClass.style = CS_CLASSDC;
-	windowClass.lpfnWndProc = WindowProcess;
+	windowClass.lpfnWndProc = (WNDPROC)WindowProcess;
 	windowClass.cbClsExtra = 0;
 	windowClass.cbWndExtra = 0;
 	windowClass.hInstance = GetModuleHandleA(0);
@@ -87,15 +87,15 @@ void gui::CreateHWindow(const char* windowName) noexcept
 	windowClass.hCursor = 0;
 	windowClass.hbrBackground = 0;
 	windowClass.lpszMenuName = 0;
-	windowClass.lpszClassName = "class001";
+	windowClass.lpszClassName = L"class001";
 	windowClass.hIconSm = 0;
 
 	RegisterClassEx(&windowClass);
 
 	window = CreateWindowEx(
 		0,
-		"class001",
-		windowName,
+		L"class001",
+		(WCHAR *)windowName,
 		WS_POPUP,
 		100,
 		100,
